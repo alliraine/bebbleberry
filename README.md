@@ -1,5 +1,5 @@
 # BebbleBerry
-[![](https://dcbadge.vercel.app/api/server/INVITEID)](https://discord.gg/INVITEID)
+[![](https://dcbadge.vercel.app/api/server/k3GPydGhYp)](https://discord.gg/k3GPydGhYp)
 
 A BeepBerry Launcher and UI Framework using a PebbleUI-esc design. 
 
