@@ -35,3 +35,8 @@ There are two main goals for this project:
 - Email Client
 - Music player
 - Camera App
+- GAMES
+  - Pong
+  - Block Breaker
+  - Tetris
+  - Snake
