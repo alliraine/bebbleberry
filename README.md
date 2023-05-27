@@ -1,4 +1,6 @@
 # BebbleBerry
+[![](https://dcbadge.vercel.app/api/server/k3GPydGhYp)](https://discord.gg/k3GPydGhYp)
+
 A BeepBerry Launcher and UI Framework using a PebbleUI-esc design. 
 
 There are two main goals for this project:
