@@ -3,12 +3,6 @@ import os
 import yaml
 from pyray import *
 
-s_width = 400
-s_height = 240
-
-selected = 0
-
-
 def get_installed_apps():
     apps = []
     for app in [app for app in os.listdir("apps") if os.path.isdir(f"apps/{app}")]:
@@ -33,7 +27,9 @@ def get_installed_apps():
 
 
 def main():
-    global selected
+    s_width = 400
+    s_height = 240
+    selected = 0
 
     ## create emulation window
     init_window(s_width, s_height, "BebbleBerry Emulator")
@@ -45,6 +41,7 @@ def main():
     apps = get_installed_apps()
 
     MukataBold = load_font("res/fonts/Mukta-Bold.ttf")
+    MukataSemiBold = load_font("res/fonts/Mukta-SemiBold.ttf")
     MukataRegular = load_font("res/fonts/Mukta-Regular.ttf")
 
     while not window_should_close():
@@ -64,8 +61,9 @@ def main():
         # draw notifications bar
         draw_rectangle(0, 0, s_width, 30, BLACK)
 
-        # draw push notification
-        draw_text_ex(MukataRegular, "New Message From Ellie!", Vector2(8, 4), 24, 0, WHITE)
+        if 0 > 1:
+            # draw push notification
+            draw_text_ex(MukataRegular, noti_q[0], Vector2(8, 4), 24, 0, WHITE)
 
         for app in apps:
 
@@ -94,7 +92,7 @@ def main():
             draw_rectangle(app_x + 5, app_y + 5, 90, 90, bg_color)
 
             # draw app name
-            draw_text_ex(MukataBold, app.get("name"), Vector2(app_x + int((90 - (len(app.get("name") * 5))) / 2), app_y + 74), 24, 0, text_color)
+            draw_text_ex(MukataSemiBold, app.get("name"), Vector2(app_x + int((90 - (len(app.get("name") * 5))) / 2), app_y + 74), 24, 0, text_color)
 
             # draw icon
             draw_texture(icon, app_x + 25, app_y + 15, text_color)
