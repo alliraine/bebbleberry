@@ -44,8 +44,10 @@ def main():
     ## loads apps from disk
     apps = get_installed_apps()
 
-    while not window_should_close():
+    MukataBold = load_font("res/fonts/Mukta-Bold.ttf")
+    MukataRegular = load_font("res/fonts/Mukta-Regular.ttf")
 
+    while not window_should_close():
         # handle input. kinda hacky. I think I can do better
         if is_key_pressed(264) and selected + 4 < len(apps):
             selected += 4
@@ -63,7 +65,7 @@ def main():
         draw_rectangle(0, 0, s_width, 30, BLACK)
 
         # draw push notification
-        draw_text("New Message From Ellie!", 8, 10, 10, WHITE)
+        draw_text_ex(MukataRegular, "New Message From Ellie!", Vector2(8, 4), 24, 0, WHITE)
 
         for app in apps:
 
@@ -80,7 +82,6 @@ def main():
                 app_y += 95
                 x = i - 4
                 app_x = 8 + (x * 100) - a * x
-
             # set colors based on if selected
             bg_color = BLACK if i == selected else WHITE
             text_color = WHITE if i == selected else BLACK
@@ -93,7 +94,7 @@ def main():
             draw_rectangle(app_x + 5, app_y + 5, 90, 90, bg_color)
 
             # draw app name
-            draw_text(app.get("name"), app_x + int((90 - (len(app.get("name") * 6))) / 2), app_y + 80, 14, text_color)
+            draw_text_ex(MukataBold, app.get("name"), Vector2(app_x + int((90 - (len(app.get("name") * 5))) / 2), app_y + 74), 24, 0, text_color)
 
             # draw icon
             draw_texture(icon, app_x + 25, app_y + 15, text_color)
