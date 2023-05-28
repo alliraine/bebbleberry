@@ -1,9 +1,7 @@
 import logging
 import os
-
 import yaml
 from pyray import *
-from PIL import Image
 
 s_width = 400
 s_height = 240
