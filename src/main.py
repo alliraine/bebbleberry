@@ -8,6 +8,7 @@ s_height = 240
 
 selected = 0
 
+
 def get_installed_apps():
     apps = []
     for app in [app for app in os.listdir("apps") if os.path.isdir(f"apps/{app}")]:
@@ -38,7 +39,7 @@ def main():
     init_window(s_width, s_height, "BebbleBerry Emulator")
 
     ## remove debug logs that spam
-    set_trace_log_level(logging.CRITICAL)
+    # set_trace_log_level(logging.CRITICAL)
 
     ## loads apps from disk
     apps = get_installed_apps()
