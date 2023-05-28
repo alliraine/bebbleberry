@@ -1,7 +1,13 @@
 import logging
 import os
+from datetime import datetime
+import time
+
 import yaml
 from pyray import *
+
+from src.noti_q.noti_q import NotificationQueue
+
 
 def get_installed_apps():
     apps = []
@@ -34,6 +40,8 @@ def main():
     ## create emulation window
     init_window(s_width, s_height, "BebbleBerry Emulator")
 
+    noti_q = NotificationQueue()
+
     ## remove debug logs that spam
     # set_trace_log_level(logging.CRITICAL)
 
@@ -43,6 +51,16 @@ def main():
     MukataBold = load_font("res/fonts/Mukta-Bold.ttf")
     MukataSemiBold = load_font("res/fonts/Mukta-SemiBold.ttf")
     MukataRegular = load_font("res/fonts/Mukta-Regular.ttf")
+
+    bell = load_texture("res/icons/bell-solid.png")
+    wifi = load_texture("res/icons/wifi-solid.png")
+    bluetooth = load_texture("res/icons/bluetooth-brands.png")
+    battery_level = [
+        load_texture("res/icons/battery-empty-solid.png"),
+        load_texture("res/icons/battery-quarter-solid.png"),
+        load_texture("res/icons/battery-half-solid.png"),
+        load_texture("res/icons/battery-full-solid.png")
+    ]
 
     while not window_should_close():
         # handle input. kinda hacky. I think I can do better
@@ -61,9 +79,18 @@ def main():
         # draw notifications bar
         draw_rectangle(0, 0, s_width, 30, BLACK)
 
-        if 0 > 1:
-            # draw push notification
-            draw_text_ex(MukataRegular, noti_q[0], Vector2(8, 4), 24, 0, WHITE)
+        # draw system icons
+        draw_texture(wifi, 275, 8, WHITE)
+        draw_texture(bluetooth, 295, 8, WHITE)
+        draw_texture(battery_level[3], 315, 8, WHITE)
+
+        # draw time
+        draw_text_ex(MukataSemiBold, datetime.now().strftime("%I:%M %p"), Vector2(335, 5), 24, 0,
+                     WHITE)
+
+        #draw number of notifications
+        draw_texture(bell, 8, 8, WHITE)
+        draw_text_ex(MukataSemiBold, f"{str(len(noti_q.queue))} notifications", Vector2(25, 4), 24, 0, WHITE)
 
         for app in apps:
 
@@ -91,8 +118,12 @@ def main():
             # draw background
             draw_rectangle(app_x + 5, app_y + 5, 90, 90, bg_color)
 
+            text_size = measure_text_ex(MukataSemiBold, app.get("name"), 24, 0)
+            text_size = text_size.x
+
+
             # draw app name
-            draw_text_ex(MukataSemiBold, app.get("name"), Vector2(app_x + int((90 - (len(app.get("name") * 5))) / 2), app_y + 74), 24, 0, text_color)
+            draw_text_ex(MukataSemiBold, app.get("name"), Vector2(app_x + int((100 - text_size) / 2), app_y + 72), 24, 0, text_color)
 
             # draw icon
             draw_texture(icon, app_x + 25, app_y + 15, text_color)
