@@ -1,4 +1,5 @@
-from notification import Notification
+from src.noti_q.notification import Notification
+
 
 class NotificationQueue:
     def __init__(self):
@@ -9,4 +10,7 @@ class NotificationQueue:
 
     def get_noticication(self):
         if len(self.queue) > 0:
-            print("next")
+            if self.queue[0].time <= 0:
+                self.queue.pop()
+            self.queue[0].time -= 1
+            return self.queue[0].text

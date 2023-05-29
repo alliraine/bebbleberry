@@ -1,8 +1,8 @@
+from pyray import load_texture
+
+
 class Notification:
-    def __init__(self, app, priority, message, icon, time=400):
+    def __init__(self, app, message, icon):
         self.app = app
-        self.priority = priority
         self.message = message
         self.icon = icon
-        self.time = time
-
